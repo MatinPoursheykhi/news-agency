@@ -30,13 +30,13 @@ export class NewsAgencyService {
         return this.newsAgencyRepo.save(news_agency_instance)
     }
 
-    // parameters: new_agency_id as id for search, and update_body
+    // parameters: id for search, and update_body
     // return: the number of affected records
     async update(id: string, update_body: UpdateNewsAgencyDTO) {
         return await this.newsAgencyRepo.update({ id }, update_body);
     }
 
-    // parameters: new_agency_id as id to search
+    // parameters: id for search
     // return: the number of affected records
     async delete(id: string) {
         return await this.newsAgencyRepo.delete({ id });

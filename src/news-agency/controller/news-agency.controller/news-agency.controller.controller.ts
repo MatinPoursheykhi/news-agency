@@ -34,8 +34,8 @@ export class NewsAgencyController {
     // calling the delete method from service
     // parameters: pull out the id from param, for search
     @Delete(':id')
-    delete(@Param('id') new_agency_id: string) {
-        return this.newsAgency.delete(new_agency_id)
+    delete(@Param('id') id: string) {
+        return this.newsAgency.delete(id)
     }
 
     // calling the findAll method from service
