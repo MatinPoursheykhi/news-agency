@@ -12,7 +12,7 @@ export class NewsAgency {
     // it will auto generate the id with uuid value, when the record is inserting
     @PrimaryGeneratedColumn('uuid')
     readonly id: string;
-    
+
     @Column({ nullable: false })
     title: string;
 
@@ -26,9 +26,8 @@ export class NewsAgency {
     // sets the date value when the record is inserting,
     // because of setting a defualt value
     @Index()
-    @Column({ default: +new Date })
-    dateMillisec: number
-
+    @Column({ default: new Date().toLocaleDateString('fa-IR-u-nu-latn') })
+    date: string;
     // sets the date value when the record is inserting
     @CreateDateColumn()
     createdAt: Date

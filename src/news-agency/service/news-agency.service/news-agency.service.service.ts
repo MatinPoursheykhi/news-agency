@@ -47,10 +47,10 @@ export class NewsAgencyService {
         return await this.newsAgencyRepo.find()
     }
 
-    // search for records with the same dateMillisec
+    // search for records with the same date
     // return: founded related records
-    async findByDate(dateMillisec: number): Promise<NewsAgency[]> {
-        return await this.newsAgencyRepo.find({ where: { dateMillisec } })
+    async findByDate(date: string): Promise<NewsAgency[]> {
+        return await this.newsAgencyRepo.find({ where: { date } })
     }
 
     // search for records with the same agencyName
@@ -59,9 +59,9 @@ export class NewsAgencyService {
         return await this.newsAgencyRepo.find({ where: { agencyName } })
     }
 
-    // search for records with the same agencyName and dateMillisec
+    // search for records with the same agencyName and date
     // return: founded related records
-    async findByNameAndDate(dateMillisec: number, agencyName: string): Promise<NewsAgency[]> {
-        return await this.newsAgencyRepo.find({ where: { dateMillisec, agencyName } })
+    async findByNameAndDate(date: string, agencyName: string): Promise<NewsAgency[]> {
+        return await this.newsAgencyRepo.find({ where: { date, agencyName } })
     }
 }

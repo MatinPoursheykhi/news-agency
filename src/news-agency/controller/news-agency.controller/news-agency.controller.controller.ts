@@ -45,10 +45,11 @@ export class NewsAgencyController {
     }
 
     // calling the findByDate from service
-    // parameter: pull out the dateMillisec from param, for search
-    @Get('search-by-date/:dateMillisec')
-    findByDate(@Param('dateMillisec') dateMillisec: number): Promise<NewsAgency[]> {
-        return this.newsAgency.findByDate(dateMillisec)
+    // parameter: pull out the date from param, for search
+    @Get('search-by-date/:date') // example: date = 1402,9,25
+    findByDate(@Param('date') date: string): Promise<NewsAgency[]> {
+        date = date.replaceAll(',', '/') // remove the ',' operator from date and replace '/'
+        return this.newsAgency.findByDate(date)
     }
 
     // calling the findByName from service
@@ -59,9 +60,10 @@ export class NewsAgencyController {
     }
 
     // calling the findByNameAndDate from service
-    // parameter: pull out the agency_name and dateMillisec from param, for search
-    @Get('search-by-date-and-name/:dateMillisec/:agencyName')
-    findByNameAndDate(@Param('agencyName') agencyName: string, @Param('dateMillisec') dateMillisec: number): Promise<NewsAgency[]> {
-        return this.newsAgency.findByNameAndDate(dateMillisec, agencyName)
+    // parameter: pull out the agency_name and date from param, for search
+    @Get('search-by-date-and-name/:date/:agencyName') // example: date = 1402,9,25
+    findByNameAndDate(@Param('agencyName') agencyName: string, @Param('date') date: string): Promise<NewsAgency[]> {
+        date = date.replaceAll(',', '/') // remove the ',' operator from date and replace '/'
+        return this.newsAgency.findByNameAndDate(date, agencyName)
     }
 }
