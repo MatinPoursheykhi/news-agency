@@ -2,7 +2,7 @@
 // and also handle the requests and responses through its routes
 
 // pull out needed decorators and methods to handle the requests and responses
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
 import { NewsAgency } from 'src/entities/newsAgency.entity';
 import { InsertNewsAgencyDTO, UpdateNewsAgencyDTO } from 'src/news-agency/dtos';
@@ -46,9 +46,8 @@ export class NewsAgencyController {
 
     // calling the findByDate from service
     // parameter: pull out the date from param, for search
-    @Get('search-by-date/:date') // example: date = 1402,9,25
-    findByDate(@Param('date') date: string): Promise<NewsAgency[]> {
-        date = date.replaceAll(',', '/') // remove the ',' operator from date and replace '/'
+    @Get('search-by-date') // example: date = 1402/9/25
+    findByDate(@Query('date') date: string): Promise<NewsAgency[]> {
         return this.newsAgency.findByDate(date)
     }
 
@@ -61,9 +60,8 @@ export class NewsAgencyController {
 
     // calling the findByNameAndDate from service
     // parameter: pull out the agency_name and date from param, for search
-    @Get('search-by-date-and-name/:date/:agencyName') // example: date = 1402,9,25
-    findByNameAndDate(@Param('agencyName') agencyName: string, @Param('date') date: string): Promise<NewsAgency[]> {
-        date = date.replaceAll(',', '/') // remove the ',' operator from date and replace '/'
+    @Get('search-by-date-and-name/:agencyName') // example: date = 1402/9/25
+    findByNameAndDate(@Param('agencyName') agencyName: string, @Query('date') date: string): Promise<NewsAgency[]> {
         return this.newsAgency.findByNameAndDate(date, agencyName)
     }
 }
